@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビンゴシミュレーター</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>🎲 ビンゴシミュレーター</h1>
+    </header>
+
+    <!-- 設定画面 -->
+    <section id="settings">
+        <h2>ゲーム設定</h2>
+
+        <div class="setting">
+            <label>最大番号</label>
+            <input type="number" id="maxNumber" value="75" min="10">
+        </div>
+
+        <div class="setting">
+            <label>参加人数</label>
+            <input type="number" id="playerCount" value="300" min="1">
+        </div>
+
+        <div class="setting">
+            <label>ビンゴ終了人数</label>
+            <input type="number" id="winnerCount" value="20" min="1">
+        </div>
+
+        <div class="setting">
+            <label>カードサイズ</label>
+            <input type="number" id="cardSize" value="5" min="3" max="10">
+        </div>
+
+        <div class="setting">
+            <label>
+                <input type="checkbox" id="freeCenter" checked>
+                中央をフリーにする
+            </label>
+        </div>
+
+        <button id="startButton">ゲーム開始</button>
+    </section>
+
+    <!-- ゲーム画面 -->
+    <section id="game" style="display:none;">
+
+        <div class="status">
+
+            <div>
+                <h3>抽選回数</h3>
+                <span id="drawCount">0</span>
+            </div>
+
+            <div>
+                <h3>経過時間</h3>
+                <span id="timer">00:00:00</span>
+            </div>
+
+            <div>
+                <h3>ビンゴ</h3>
+                <span id="bingoCount">0</span>
+            </div>
+
+            <div>
+                <h3>リーチ</h3>
+                <span id="reachCount">0</span>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="inputArea">
+
+            <input
+                id="numberInput"
+                type="number"
+                placeholder="番号を入力">
+
+            <button id="submitNumber">確定</button>
+
+            <button id="undoButton">Undo</button>
+
+        </div>
+
+        <h3>抽選済み番号</h3>
+
+        <div id="drawnNumbers"></div>
+
+        <h3>最新ビンゴ</h3>
+
+        <div id="latestBingo">
+            まだビンゴはいません。
+        </div>
+
+<hr>
+
+<h3>🏆 ビンゴ記録</h3>
+
+<div id="bingoHistory"></div>
+    </section>
+
+</div>
+
+<!-- JavaScript -->
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+// ===== 要素取得 =====
+const settings = document.getElementById("settings");
+const game = document.getElementById("game");
+
+const startButton = document.getElementById("startButton");
+const submitButton = document.getElementById("submitNumber");
+const numberInput = document.getElementById("numberInput");
+
+const drawCount = document.getElementById("drawCount");
+const timer = document.getElementById("timer");
+const drawnNumbers = document.getElementById("drawnNumbers");
+
+// ===== データ =====
+let drawn = [];
+let drawCounter = 0;
+
+let timerSeconds = 0;
+let timerId = null;
+
+// ===== タイマー =====
+function updateTimer(){
+
+    timerSeconds++;
+
+    let h = Math.floor(timerSeconds / 3600);
+    let m = Math.floor((timerSeconds % 3600) / 60);
+    let s = timerSeconds % 60;
+
+    timer.textContent =
+        String(h).padStart(2,"0") + ":" +
+        String(m).padStart(2,"0") + ":" +
+        String(s).padStart(2,"0");
+
+}
+
+// ===== ゲーム開始 =====
+startButton.onclick = function(){
+
+    settings.style.display = "none";
+    game.style.display = "block";
+
+    timerId = setInterval(updateTimer,1000);
+
+}
+
+// ===== 番号入力 =====
+function addNumber(){
+
+    const maxNumber =
+        Number(document.getElementById("maxNumber").value);
+
+    let value =
+        Number(numberInput.value);
+
+    if(isNaN(value)){
+
+        alert("数字を入力してください。");
+        return;
+
+    }
+
+    if(value < 1 || value > maxNumber){
+
+        alert("1〜" + maxNumber + "を入力してください。");
+        return;
+
+    }
+
+    if(drawn.includes(value)){
+
+        alert("その番号は入力済みです。");
+        return;
+
+    }
+
+    drawn.push(value);
+
+    drawCounter++;
+
+    drawCount.textContent = drawCounter;
+
+    drawnNumbers.textContent =
+        drawn.join("　");
+
+    numberInput.value = "";
+
+    numberInput.focus();
+
+}
+
+// ===== ボタン =====
+submitButton.onclick = addNumber;
+
+// ===== Enter対応 =====
+numberInput.addEventListener("keypress",function(e){
+
+    if(e.key==="Enter"){
+
+        addNumber();
+
+    }
+
+});
